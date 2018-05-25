@@ -9,8 +9,13 @@ const styles = (theme: Theme) => ({
     flexGrow: 1,
   },
   paper: {
-    height: '100%',
+    height: '50vw',
+    'line-height': '50vw',
     width: '100%',
+    color: 'white',
+    'font-weight': 'bold',
+    'text-align': 'center',
+    'vertical-align': 'middle',
   },
   control: {
     padding: theme.spacing.unit * 2,
@@ -22,12 +27,14 @@ interface Props {
 }
 
 const items = [
-  'Sweater',
-  'Socks',
-  'Shawl',
-  'Jacket',
-  'Hat',
-  'Hoodie',
+  { name: 'Sweater', color: '#536DFE' },
+  { name: 'Socks', color: '#FFD500' },
+  { name: 'Shawl', color: '#1CE8B5' },
+  { name: 'Jacket', color: '#FF6C00' },
+  { name: 'Hat', color: '#574DDD' },
+  { name: 'Hoodie', color: '#ABD0F2' },
+  { name: 'Tuxedo', color: '#8DA0FC' },
+  { name: 'Shirt', color: '#1CE8B5' },
 ];
 
 class Items extends React.Component<Props> {
@@ -36,10 +43,16 @@ class Items extends React.Component<Props> {
     return (
       <div className={classes.root}>
         <Grid container={true} spacing={0} className={classes.root}>
-          {items.map(name => (
+          {items.map(({ name, color }) => (
             <Grid key={name} item={true} xs={6}>
-              <Paper className={classes.paper}>{name}</Paper>
-              {/*<div style={{ width: '100%'}}>foo</div>*/}
+              <Paper
+                className={classes.paper}
+                square={true}
+                elevation={0}
+                style={{ backgroundColor: color }}
+              >
+                {name}
+              </Paper>
             </Grid>
           ))}
         </Grid>
