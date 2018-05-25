@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import { Badge, Theme } from '@material-ui/core';
 
-const styles = {
+const styles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -18,7 +19,14 @@ const styles = {
     marginLeft: -12,
     marginRight: 20,
   },
-};
+  badge: {
+    top: '15px',
+    right: '10px',
+  },
+  button: {
+    transform: 'translate(10px, -10px)',
+  },
+});
 
 interface Props {
   classes: any;
@@ -53,13 +61,21 @@ class MenuAppBar extends React.Component<Props> {
             </Typography>
             <div>
               {!inCart ? (
-                <IconButton
-                  aria-haspopup="true"
+                <Badge
+                  className={classes.badge}
+                  badgeContent={10}
+                  color="secondary"
                   onClick={onToggle}
-                  color="inherit"
                 >
-                  <ShoppingCart />
-                </IconButton>
+                  <IconButton
+                    className={classes.button}
+                    aria-haspopup="true"
+                    onClick={onToggle}
+                    color="inherit"
+                  >
+                    <ShoppingCart />
+                  </IconButton>
+                </Badge>
               ) : null}
             </div>
           </Toolbar>

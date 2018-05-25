@@ -6,6 +6,7 @@ import createMuiTheme from '@material-ui/core/styles/createMuiTheme';
 import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
 import blue from '@material-ui/core/colors/blue';
 import Items from './components/Items';
+import Cart from './components/Cart';
 
 const theme = createMuiTheme({
   palette: {
@@ -33,7 +34,7 @@ class App extends React.Component<{}, State> {
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <MenuAppBar onToggle={this.toggle} inCart={showCart} />
-        {showCart ? <div>cart</div> : <Items />}
+        {showCart ? <Cart /> : <Items />}
       </MuiThemeProvider>
     );
   }
