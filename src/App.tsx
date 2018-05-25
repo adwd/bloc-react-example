@@ -13,13 +13,27 @@ const theme = createMuiTheme({
   },
 });
 
-class App extends React.Component {
+interface State {
+  showCart: boolean;
+}
+
+class App extends React.Component<{}, State> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      showCart: false,
+    };
+  }
+
+  toggle = () => this.setState({ showCart: !this.state.showCart });
+
   public render() {
+    const { showCart } = this.state;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <MenuAppBar />
-        <Items />
+        <MenuAppBar onToggle={this.toggle} inCart={showCart} />
+        {showCart ? <div>cart</div> : <Items />}
       </MuiThemeProvider>
     );
   }
