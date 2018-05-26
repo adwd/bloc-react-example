@@ -4,6 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import withStyles from '@material-ui/core/styles/withStyles';
 import { Theme } from '@material-ui/core/styles/createMuiTheme';
 
+import { Product, products } from 'cart-bloc';
+
 const styles = (theme: Theme) => ({
   root: {
     flexGrow: 1,
@@ -24,34 +26,30 @@ const styles = (theme: Theme) => ({
 
 interface Props {
   classes: any;
+  addItem: (product: Product, count: number) => void;
 }
 
-const items = [
-  { name: 'Sweater', color: '#536DFE' },
-  { name: 'Socks', color: '#FFD500' },
-  { name: 'Shawl', color: '#1CE8B5' },
-  { name: 'Jacket', color: '#FF6C00' },
-  { name: 'Hat', color: '#574DDD' },
-  { name: 'Hoodie', color: '#ABD0F2' },
-  { name: 'Tuxedo', color: '#8DA0FC' },
-  { name: 'Shirt', color: '#1CE8B5' },
-];
-
 class Items extends React.Component<Props> {
+  addToCart = (p: Product) => () => {
+    console.log(p);
+    this.props.addItem(p, 1);
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, addItem } = this.props;
     return (
       <div className={classes.root}>
         <Grid container={true} spacing={0} className={classes.root}>
-          {items.map(({ name, color }) => (
-            <Grid key={name} item={true} xs={6}>
+          {products.map((item) => (
+            <Grid key={item.name} item={true} xs={6}>
               <Paper
                 className={classes.paper}
                 square={true}
                 elevation={0}
-                style={{ backgroundColor: color }}
+                style={{ backgroundColor: item.color }}
+                onClick={this.addToCart(item)}
               >
-                {name}
+                {item.name}
               </Paper>
             </Grid>
           ))}

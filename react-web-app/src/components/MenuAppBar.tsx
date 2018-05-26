@@ -32,11 +32,12 @@ interface Props {
   classes: any;
   inCart: boolean;
   onToggle: () => void;
+  count: number;
 }
 
 class MenuAppBar extends React.Component<Props> {
   render() {
-    const { classes, inCart, onToggle } = this.props;
+    const { classes, inCart, onToggle, count } = this.props;
 
     return (
       <div className={classes.root}>
@@ -63,7 +64,7 @@ class MenuAppBar extends React.Component<Props> {
               {!inCart ? (
                 <Badge
                   className={classes.badge}
-                  badgeContent={10}
+                  badgeContent={count}
                   color="secondary"
                   onClick={onToggle}
                 >

@@ -9,10 +9,7 @@ import {
   withStyles,
 } from '@material-ui/core';
 
-const items = [
-  { name: 'Sweater', color: '#536DFE' },
-  { name: 'Socks', color: '#FFD500' },
-];
+import { CartItem } from 'cart-bloc';
 
 const styles = {
   list: {
@@ -26,28 +23,27 @@ const styles = {
 
 interface Props {
   classes: any;
+  cartItems: CartItem[];
 }
 
 class Cart extends React.Component<Props> {
   render() {
-    const { classes } = this.props;
+    const { classes, cartItems } = this.props;
     return (
       <>
         <List className={classes.list}>
-          {items.map(({ name, color }) => (
+          {cartItems.map((item) => (
             <ListItem
-              key={name}
+              key={item.product.id}
               role={undefined}
               dense={true}
               button={true}
-              onClick={console.log}
-              style={{ backgroundColor: color }}
+              style={{ backgroundColor: item.product.color }}
             >
-              <ListItemText primary={name} className={classes.itemText} />
+              <ListItemText primary={item.product.name} className={classes.itemText} />
               <ListItemSecondaryAction>
                 <IconButton aria-label="Comments">
-                  {/* <CommentIcon /> */}
-                  <Avatar>1</Avatar>
+                  <Avatar>{item.count}</Avatar>
                 </IconButton>
               </ListItemSecondaryAction>
             </ListItem>

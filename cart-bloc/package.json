@@ -1,0 +1,21 @@
+{
+  "name": "cart-bloc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types" : "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rxjs": "^6.2.0",
+    "typescript": "^2.8.3"
+  },
+  "peerDependencies": {
+    "rxjs": "^6.2.0"
+  }
+}
