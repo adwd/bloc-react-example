@@ -1,4 +1,4 @@
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Observer, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { CartAddition, CartItem, Product } from './model';
@@ -12,10 +12,13 @@ export class CartBloc {
     return this.items.pipe(map(items => items.length));
   }
 
-  public addToCart = new Subject<CartAddition>();
+  private _addToCart = new Subject<CartAddition>();
+  public get addToCart(): Observer<CartAddition> {
+    return this._addToCart;
+  }
 
   constructor() {
-    this.addToCart.subscribe(addition => {
+    this._addToCart.subscribe(addition => {
       this.add(addition.product, addition.count);
     })
   }
