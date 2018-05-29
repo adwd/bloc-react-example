@@ -26,13 +26,13 @@ const styles = (theme: Theme) => ({
 
 interface Props {
   classes: any;
-  addItem: (product: Product, count: number) => void;
+  addItem: (item: { product: Product, count: number }) => void;
 }
 
 class Items extends React.Component<Props> {
   addToCart = (p: Product) => () => {
     console.log(p);
-    this.props.addItem(p, 1);
+    this.props.addItem({ product: p, count: 1 });
   };
 
   render() {

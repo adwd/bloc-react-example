@@ -34,7 +34,9 @@ class App extends React.Component<{}, State> {
       cartItems: [],
       count: 0,
     };
+  }
 
+  componentDidMount() {
     const sub1 = bloc.items.subscribe(cartItems => this.setState({ cartItems }));
     this.subsucription.add(sub1);
 
@@ -48,13 +50,15 @@ class App extends React.Component<{}, State> {
 
   toggle = () => this.setState({ showCart: !this.state.showCart });
 
+  handleAddItem = (item: any) => bloc.addToCart.next(item);
+
   public render() {
     const { showCart, cartItems, count } = this.state;
     return (
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <MenuAppBar onToggle={this.toggle} inCart={showCart} count={count} />
-        {showCart ? <Cart cartItems={cartItems} /> : <Items addItem={bloc.addToCart} />}
+        {showCart ? <Cart cartItems={cartItems} /> : <Items addItem={this.handleAddItem} />}
       </MuiThemeProvider>
     );
   }
